@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Stewart Stitches | Embroidery Orders</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="#" class="logo">Stewart Stitches</a>
+      <nav class="nav" aria-label="Main">
+        <a href="#in-stock">In stock</a>
+        <a href="#custom">Custom work</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <button type="button" class="btn btn-ghost header-cta" data-open-order-modal data-item="General inquiry">Order</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-content">
+        <p class="hero-eyebrow">Embroidery · Machine stitch · Patches &amp; apparel</p>
+        <h1>Wearable art, stitched to order</h1>
+        <p class="hero-lead">
+          Browse ready-made pieces from our studio rack, or describe a custom project and we will quote thread, timeline, and price.
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#in-stock">Shop in-stock</a>
+          <a class="btn btn-outline" href="#custom">Start a custom brief</a>
+        </div>
+      </div>
+      <div class="hero-visual" aria-hidden="true">
+        <div class="hero-frame"></div>
+      </div>
+    </section>
+
+    <section id="in-stock" class="section in-stock">
+      <div class="section-head">
+        <h2>In-stock gallery</h2>
+        <p class="section-sub">Pieces we have photographed and ready to ship or finish with your size. Tap an item to request it.</p>
+      </div>
+
+      <div class="filters" role="group" aria-label="Filter by category">
+        <button type="button" class="filter-btn is-active" data-filter="all">All</button>
+        <button type="button" class="filter-btn" data-filter="patches">Patches</button>
+        <button type="button" class="filter-btn" data-filter="apparel">Apparel</button>
+        <button type="button" class="filter-btn" data-filter="home">Home</button>
+      </div>
+
+      <ul class="product-grid" id="product-grid"></ul>
+    </section>
+
+    <section id="custom" class="section custom">
+      <div class="custom-layout">
+        <div class="custom-intro">
+          <h2>Custom projects</h2>
+          <p>
+            Send a short brief: subject, placement, colors, size, and deadline. We reply with a sketch or mock-up and a fixed quote before any deposit.
+          </p>
+          <ul class="custom-list">
+            <li>Logos and monograms for teams and small businesses</li>
+            <li>Jackets, caps, tote bags, and heirloom linens</li>
+            <li>Digitizing from your artwork (vector or high-res raster)</li>
+          </ul>
+        </div>
+
+        <form class="custom-form" id="custom-form" novalidate>
+          <div class="form-row two">
+            <label>
+              <span>Name</span>
+              <input type="text" name="name" required autocomplete="name" placeholder="Your name" />
+            </label>
+            <label>
+              <span>Email</span>
+              <input type="email" name="email" required autocomplete="email" placeholder="you@example.com" />
+            </label>
+          </div>
+          <label>
+            <span>Project title</span>
+            <input type="text" name="title" required placeholder="e.g. Club jacket back panel" />
+          </label>
+          <label>
+            <span>Describe the design</span>
+            <textarea name="description" rows="5" required placeholder="Motif, text, style references, where it will go on the garment…"></textarea>
+          </label>
+          <div class="form-row two">
+            <label>
+              <span>Approx. size</span>
+              <input type="text" name="size" placeholder="e.g. 4×4 in chest" />
+            </label>
+            <label>
+              <span>Needed by</span>
+              <input type="date" name="deadline" />
+            </label>
+          </div>
+          <label>
+            <span>Thread / fabric colors (optional)</span>
+            <input type="text" name="colors" placeholder="Navy, cream, metallic gold…" />
+          </label>
+          <label class="file-label">
+            <span>Reference image (optional)</span>
+            <input type="file" name="file" accept="image/*,.pdf" />
+          </label>
+          <button type="submit" class="btn btn-primary btn-block">Send brief</button>
+          <p class="form-hint" id="custom-form-status" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+
+    <section id="contact" class="section contact-strip">
+      <div class="contact-inner">
+        <div>
+          <h2>Questions?</h2>
+          <p>We'll get back yo you as soon as possible!</p>
+        </div>
+        <a class="btn btn-outline" href="mailto:hello@stewartstitches.example">hello@stewartstitches.example</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; <span id="year"></span> Stewart Stitches.</p>
+  </footer>
+
+  <div class="modal-backdrop" id="order-modal-backdrop" hidden></div>
+  <div class="modal" id="order-modal" role="dialog" aria-modal="true" aria-labelledby="order-modal-title" hidden>
+    <button type="button" class="modal-close" id="order-modal-close" aria-label="Close">&times;</button>
+    <h2 id="order-modal-title">Request an item</h2>
+    <p class="modal-item" id="order-modal-item-label"></p>
+    <form id="order-modal-form">
+      <input type="hidden" name="item" id="order-modal-item-input" />
+      <label>
+        <span>Your email</span>
+        <input type="email" name="email" required autocomplete="email" placeholder="you@example.com" />
+      </label>
+      <label>
+        <span>Notes (size, shipping, deadline)</span>
+        <textarea name="notes" rows="4" placeholder="Anything we should know"></textarea>
+      </label>
+      <button type="submit" class="btn btn-primary btn-block">Submit request</button>
+      <p class="form-hint" id="order-modal-status" role="status" aria-live="polite"></p>
+    </form>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

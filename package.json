@@ -1,0 +1,19 @@
+{
+  "name": "embroiderysite",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Stewart Stitches — static embroidery order site",
+  "scripts": {
+    "start": "node server.js",
+    "serve:static": "serve -l 5173 ."
+  },
+  "dependencies": {
+    "dotenv": "^17.4.0",
+    "express": "^4.21.2",
+    "multer": "^2.1.1",
+    "nodemailer": "^8.0.4"
+  },
+  "devDependencies": {
+    "serve": "^14.2.4"
+  }
+}
